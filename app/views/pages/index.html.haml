@@ -1,0 +1,30 @@
+
+= stylesheet_link_tag "jquery_mobile", "application"
+= javascript_include_tag "application"
+
+%div{:data => { :role => 'page'}}
+  %div{:data => { :role => 'header'}}
+    %h1 Ros Walker App
+  %div{:data => { :role => 'content'}}
+    %form
+      %div{:class => "ui-grid-a"}
+        %div{:class => 'ui-block-a'}
+          %label{:for => 'textinput-s'} Insert IP Address:
+          %input{:type => 'text', :name => 'textinput-s', :id => 'textinput-s', :placeholder => "172.16.37.198", :value => '172.16.37.198:9090', :data => {:clear => {:btn => 'true'}}}
+        %div{:class => 'ui-block-b'}
+          %label{:for => "flip-10"} Connect:
+          %select{:name => "flip-10", :id => "flip-10", :data => {:role => "slider"}}
+            %option{:value => "off"} Off
+            %option{:value => "on"} On
+    %div{:class => 'button_container'}
+      %div{:class => 'button_grid_forward'}
+        %a{:href => "#",  :id => "forward_btn", :data => {:role => "button", :icon => "arrow-u", :iconpos => "top", :inline => "true"}} Forward
+      %div{:class => 'button_grid_strafe'} 
+        %a{:href => "#",  :id => "left_btn", :data => {:role => "button", :icon => "arrow-l", :iconpos => "left", :inline => "true"}} Left
+        %a{:href => "#",  :id => "right_btn", :data => {:role => "button", :icon => "arrow-r", :iconpos => "right", :inline => "true"}} Right
+      %div{:class => 'button_grid_backward'}
+        %a{:href => "#",  :id => "backward_btn", :data => {:role => "button", :icon => "arrow-d", :iconpos => "bottom", :inline => "true"}} Backward
+      %div{:class => 'button_grid_stop'}
+        %a{:href => "#",  :id => "stop_btn", :data => {:role => "button", :icon => "alert", :inline => "true"}} Stop
+  %div{:data => { :role => 'footer'}}
+    %h1{:class => 'lol'} v. 1.0.0

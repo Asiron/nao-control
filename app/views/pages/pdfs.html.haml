@@ -1,0 +1,4 @@
+%div
+  = Dir["public/files/*.pdf"].each do |file|
+    %li
+      = link_to file, "http://localhost:3000" + file[/\/.*/]
