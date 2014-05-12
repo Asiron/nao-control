@@ -1,0 +1,33 @@
+@media all and (max-width: 28em){
+    .ui-grid-a .ui-block-a,
+    .ui-grid-a .ui-block-b {
+        width: 100%;
+        clear: left;
+        margin-right: 5em;
+    }
+}
+.button_container {
+	position: relative;
+	width: 15em;
+	height: 18em;
+}
+
+.button_grid_forward {
+	position: absolute;
+	left: 21%
+}
+.button_grid_strafe {
+	position: absolute;
+	top: 30%;
+	left: 0;
+}
+.button_grid_backward {
+	position: absolute;
+	top: 50%;
+	left: 19%;
+}
+.button_grid_stop {
+	position: absolute;
+	bottom: 0;
+	left: 21%;
+}

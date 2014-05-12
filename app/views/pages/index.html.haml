@@ -1,5 +1,5 @@
 
-= stylesheet_link_tag "jquery_mobile", "application"
+= stylesheet_link_tag "jquery_mobile", "jquery_mobile_structure", "application"
 = javascript_include_tag "application"
 
 %div{:data => { :role => 'page'}}
@@ -25,6 +25,6 @@
       %div{:class => 'button_grid_backward'}
         %a{:href => "#",  :id => "backward_btn", :data => {:role => "button", :icon => "arrow-d", :iconpos => "bottom", :inline => "true"}} Backward
       %div{:class => 'button_grid_stop'}
-        %a{:href => "#",  :id => "stop_btn", :data => {:role => "button", :icon => "alert", :inline => "true"}} Stop
+        %a{:href => "#",  :id => "stop_btn", :data => {:role => "button", :icon => "gear", :inline => "true"}} Stop
   %div{:data => { :role => 'footer'}}
     %h1{:class => 'lol'} v. 1.0.0
