@@ -6,6 +6,10 @@
         margin-right: 5em;
     }
 }
+h1 {
+	font-family: Helvetica;
+}
+
 .button_container {
 	position: relative;
 	width: 15em;

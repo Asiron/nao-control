@@ -5,9 +5,9 @@
 
 $(document).ready(function() {
 
-	var connection = null;
-	var topic 	   = null;
-
+	var connection  = null;
+	var cmdVelTopic = null;
+	var speechTopic = null;
 	var isConnected = false;
 
 	function callStiffness(connection, enable) {
@@ -23,6 +23,7 @@ $(document).ready(function() {
 			name: arg,
 			serviceType: arg
 		});
+
 		var request = new ROSLIB.ServiceRequest({
 		});
 		jointStiffness.callService(request, function(){});
@@ -96,33 +97,41 @@ $(document).ready(function() {
 
 	$("#forward_btn").click(function() {
 		if (isConnected == true) {
-			topic.publish(goForward);
+			cmdVelTopic.publish(goForward);
 		}
-	})
+	});
 
 	$("#backward_btn").click(function() {
 		if (isConnected == true) {
-			topic.publish(goBackwards);
+			cmdVelTopic.publish(goBackwards);
 		}
-	})
+	});
 
 	$("#left_btn").click(function() {
 		if (isConnected == true) {
-			topic.publish(turnLeft);
+			cmdVelTopic.publish(turnLeft);
 		}
-	})
+	});
 
 	$("#right_btn").click(function() {
 		if (isConnected == true) {
-			topic.publish(turnRight);
+			cmdVelTopic.publish(turnRight);
 		}
-	})	
+	});
 
 	$("#stop_btn").click(function() {
 		if (isConnected == true) {
-			topic.publish(stop);
+			cmdVelTopic.publish(stop);
 		}
-	})	
+	});
+
+	$("#send_message_btn").click(function() {
+		if (isConnected == true) {
+			var msg = $("#message_input").val();
+			var speechMessage = new ROSLIB.Message({data : msg});
+			speechTopic.publish(speechMessage);
+		}
+	});
 
 	$("#flip-10").on( "slidestop", function( event, ui ) {} );
 	$("#flip-10").slider({
@@ -135,10 +144,15 @@ $(document).ready(function() {
 		  			connection = new ROSLIB.Ros({
 		  				url : hostname
 		  			});
-			  		topic = new ROSLIB.Topic({
+			  		cmdVelTopic = new ROSLIB.Topic({
 					    ros : connection,
 					    name : '/cmd_vel',
 					    messageType : 'geometry_msgs/Twist'
+				    });
+				    speechTopic = new ROSLIB.Topic({
+				    	ros : connection,
+				    	name : '/speech',
+				    	messageType : 'std_msgs/String',
 				    });
 				    isConnected = true;
 				    callStiffness(connection, true);
@@ -148,7 +162,7 @@ $(document).ready(function() {
 		  		}
 		  		isConnected = true;
 		  	} else {
-		  		topic.publish(stop);
+		  		cmdVelTopic.publish(stop);
 		  		callStiffness(connection, false);
 		  		connection.close();
 		  		isConnected = false;

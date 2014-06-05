@@ -53,6 +53,7 @@ RosApp::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+    get '/' => 'pages#index'
     get '/index' => 'pages#index'
     get '/pdfs' => 'pages#pdfs'
 end
