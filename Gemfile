@@ -9,7 +9,7 @@ gem 'rails', '4.0.0'
 gem 'sass-rails', '~> 4.0.0'
 
 
-gem 'pg'
+gem 'pg', '0.15.1'
 
 group :development, :test do
   gem 'debugger'
