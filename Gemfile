@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', '1.3.8'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -13,7 +13,6 @@ gem 'sass-rails', '~> 4.0.0'
 group :development, :test do
   gem 'debugger'
   gem 'byebug'
-  gem 'sqlite3'
 end
 
 # Use Uglifier as compressor for JavaScript assets
@@ -39,6 +38,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'rails_12factor', group: :production
 
 gem 'haml'
 # Use ActiveModel has_secure_password
