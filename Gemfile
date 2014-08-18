@@ -14,6 +14,7 @@ gem 'pg', '0.15.1'
 group :development, :test do
   gem 'debugger'
   gem 'byebug'
+  gem 'sqlite3'
 end
 
 # Use Uglifier as compressor for JavaScript assets

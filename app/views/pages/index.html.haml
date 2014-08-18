@@ -2,6 +2,7 @@
 = stylesheet_link_tag "jquery_mobile", "jquery_mobile_structure", "application"
 = javascript_include_tag "application"
 
+
 %div{:data => { :role => 'page'}}
   %div{:data => { :role => 'header'}}
     %h1 Ros Walker
@@ -10,7 +11,7 @@
       %div{:class => "ui-grid-a"}
         %div{:class => 'ui-block-a'}
           %label{:for => 'textinput-s'} Insert IP Address:
-          %input{:type => 'text', :name => 'textinput-s', :id => 'textinput-s', :placeholder => "172.16.37.150:9090", :value => '172.16.37.150:9090', :data => {:clear => {:btn => 'true'}}}
+          %input{:type => 'text', :name => 'textinput-s', :id => 'textinput-s', :placeholder => @local_ip, :value => @local_ip, :data => {:clear => {:btn => 'true'}}}
         %div{:class => 'ui-block-b'}
           %label{:for => "flip-10"} Connect:
           %select{:name => "flip-10", :id => "flip-10", :data => {:role => "slider"}}
@@ -31,5 +32,8 @@
         %input{:type => 'text', :name => 'textinput-s', :id => 'message_input', :data => {:clear => {:btn => 'true'}}}
       %div{:class => 'ui-block-b'}
         %a{:href => "#",  :id => "send_message_btn", :data => {:role => "button", :icon => "gear", :inline => "true"}} Send
+  
+    %div{:class => 'jpeg_stream_viewer', :id =>'mjpeg'}
+      %h2 Camera Top View
   %div{:data => { :role => 'footer'}}
     %h1{:class => 'lol'} 1.0.0

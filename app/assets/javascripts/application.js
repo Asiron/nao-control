@@ -2,8 +2,40 @@
 //=require jquery_mobile
 //=require event_emitter
 //=require roslib
+//=require mjpegcanvas
 
 $(document).ready(function() {
+
+	var viewport = {
+	    width  : $(window).width(),
+	    height : $(window).height()
+	};
+
+	function initJPEGStreamer() {
+
+		var mjpegWidth  = 320;
+		var mjpegHeight = 240 
+
+		if (viewport.width < mjpegWidth) {
+			mjpegWidth = viewport.width;
+		}
+
+		if (viewport.height < mjpegHeight) {
+			mjpegHeight = viewport.height;
+		};
+
+
+     	var viewer = new MJPEGCANVAS.Viewer({
+			divID : 'mjpeg',
+			host : 'localhost',
+			width : mjpegWidth * 0.80,
+			height : mjpegHeight * 0.80,
+			topic : '/camera/image_raw',	
+			port: 36000
+    	});
+	}
+
+	initJPEGStreamer();
 
 	var connection  = null;
 	var cmdVelTopic = null;

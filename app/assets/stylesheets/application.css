@@ -6,8 +6,9 @@
         margin-right: 5em;
     }
 }
-h1 {
-	font-family: Helvetica;
+
+.flip-10 {
+	width: 20em;
 }
 
 .button_container {
