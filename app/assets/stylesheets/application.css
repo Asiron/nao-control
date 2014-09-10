@@ -1,3 +1,8 @@
+/* ...
+*= require jquery_mobile
+*= require jquery_mobile_structure
+*/
+
 @media all and (max-width: 28em){
     .ui-grid-a .ui-block-a,
     .ui-grid-a .ui-block-b {
