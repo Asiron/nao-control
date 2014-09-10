@@ -6,36 +6,53 @@
 
 $(document).ready(function() {
 
+	$("#mjpeg").hide(0);
+
 	var viewport = {
 	    width  : $(window).width(),
 	    height : $(window).height()
 	};
 
-	function initJPEGStreamer() {
+	function initJPEGStreamer(hostname) {	
+		if (mjpegViewerHostname != hostname) {
+			var mjpegWidth  = 320;
+			var mjpegHeight = 240 
 
-		var mjpegWidth  = 320;
-		var mjpegHeight = 240 
+			if (viewport.width < mjpegWidth) {
+				mjpegWidth = viewport.width;
+			}
 
-		if (viewport.width < mjpegWidth) {
-			mjpegWidth = viewport.width;
+			if (viewport.height < mjpegHeight) {
+				mjpegHeight = viewport.height;
+			};
+			delete mjpegViewer;
+			deleteCanvases()
+	     	mjpegViewer = new MJPEGCANVAS.Viewer({
+				divID : 'mjpeg',
+				host : hostname,
+				width : mjpegWidth * 0.80,
+				height : mjpegHeight * 0.80,
+				topic : '/camera/image_raw',	
+				port: 36000
+    		});	
+    		mjpegViewerHostname = hostname;
 		}
-
-		if (viewport.height < mjpegHeight) {
-			mjpegHeight = viewport.height;
-		};
-
-     	var viewer = new MJPEGCANVAS.Viewer({
-			divID : 'mjpeg',
-			host : 'localhost',
-			width : mjpegWidth * 0.80,
-			height : mjpegHeight * 0.80,
-			topic : '/camera/image_raw',	
-			port: 36000
-    	});
+	    $("#mjpeg").show(1500);	
 	}
 
-	initJPEGStreamer();
+	function deinitJPEGStreamer () {
+		$("#mjpeg").hide(1500);
+	}
 
+	function deleteCanvases() {
+		var canvas = document.getElementById("mjpeg");
+		while (canvas.children[1]) {
+    		canvas.removeChild(canvas.children[1]);
+		}
+	}
+
+	var mjpegViewerHostname = null;
+	var mjpegViewer = null;
 	var connection  = null;
 	var cmdVelTopic = null;
 	var speechTopic = null;
@@ -69,7 +86,6 @@ $(document).ready(function() {
 			}
 		});
 	}
-
 
 	var stop = new ROSLIB.Message({
 		linear : {
@@ -194,14 +210,18 @@ $(document).ready(function() {
 
 	$("#flip-10").on( "slidestop", function( event, ui ) {} );
 	$("#flip-10").slider({
+		animate: "fast",
   		stop: function( event, ui ) {
 
   			if (isConnected == false) {
-	  			var hostname = 'ws://' + $("#textinput-s").val();
-	  			console.log(hostname);
+	  			var fullHostname = $("#textinput-s").val();
+	  			var index = fullHostname.search(":");
+	  			var ip   = fullHostname.substr(0, index);
+	  			var port = fullHostname.substr(index+1, fullHostname.length);
+	  			console.log('ws://' + fullHostname);
 	  			try {
 		  			connection = new ROSLIB.Ros({
-		  				url : hostname
+		  				url : 'ws://' + fullHostname
 		  			});
 			  		cmdVelTopic = new ROSLIB.Topic({
 					    ros : connection,
@@ -215,14 +235,13 @@ $(document).ready(function() {
 				    });
 				    isConnected = true;
 				    callStiffness(connection, true);
-
 				    bodyPoseActionClient = new ROSLIB.ActionClient({
 				    	ros : connection,
 				    	serverName : '/body_pose',
 				    	actionName : 'nao_msgs/BodyPoseAction',
 				    	timeout : 3
 				    });
-
+				    initJPEGStreamer(ip);
 		  		} catch (err) {
 		  			console.log("Exception caugth");
 		  		}
@@ -232,6 +251,7 @@ $(document).ready(function() {
 		  		callStiffness(connection, false);
 		  		connection.close();
 		  		isConnected = false;
+		  		deinitJPEGStreamer();
 		  	}
 		}
 	});
