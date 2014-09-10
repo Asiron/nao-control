@@ -24,7 +24,6 @@ $(document).ready(function() {
 			mjpegHeight = viewport.height;
 		};
 
-
      	var viewer = new MJPEGCANVAS.Viewer({
 			divID : 'mjpeg',
 			host : 'localhost',
@@ -41,6 +40,7 @@ $(document).ready(function() {
 	var cmdVelTopic = null;
 	var speechTopic = null;
 	var isConnected = false;
+	var bodyPoseActionClient = null;
 
 	function callStiffness(connection, enable) {
 
@@ -59,6 +59,15 @@ $(document).ready(function() {
 		var request = new ROSLIB.ServiceRequest({
 		});
 		jointStiffness.callService(request, function(){});
+	}
+
+	function createBodyPoseGoal(name) {
+		return new ROSLIB.Goal({
+			actionClient : bodyPoseActionClient,
+			goalMessage : {
+				pose_name : name
+			}
+		});
 	}
 
 
@@ -165,6 +174,24 @@ $(document).ready(function() {
 		}
 	});
 
+	$("#stand_init_btn").click(function() {
+		if (isConnected == true) {
+			createBodyPoseGoal("StandInit").send();
+		}
+	});
+
+	$("#crouch_btn").click(function() {
+		if (isConnected == true) {
+			createBodyPoseGoal("crouch").send();
+		}
+	});
+
+	$("#hello_btn").click(function() {
+		if (isConnected == true) {
+			createBodyPoseGoal("hello").send();
+		}
+	});
+
 	$("#flip-10").on( "slidestop", function( event, ui ) {} );
 	$("#flip-10").slider({
   		stop: function( event, ui ) {
@@ -188,6 +215,13 @@ $(document).ready(function() {
 				    });
 				    isConnected = true;
 				    callStiffness(connection, true);
+
+				    bodyPoseActionClient = new ROSLIB.ActionClient({
+				    	ros : connection,
+				    	serverName : '/body_pose',
+				    	actionName : 'nao_msgs/BodyPoseAction',
+				    	timeout : 3
+				    });
 
 		  		} catch (err) {
 		  			console.log("Exception caugth");

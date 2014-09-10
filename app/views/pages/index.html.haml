@@ -31,8 +31,11 @@
       %div{:class => 'ui-block-a'}
         %input{:type => 'text', :name => 'textinput-s', :id => 'message_input', :data => {:clear => {:btn => 'true'}}}
       %div{:class => 'ui-block-b'}
-        %a{:href => "#",  :id => "send_message_btn", :data => {:role => "button", :icon => "gear", :inline => "true"}} Send
-  
+        %a{:href => "#",  :id => "send_message_btn", :data => {:role => "button", :icon => "gear", :inline => "true"}} Send 
+    %div{:id =>'body_pose_goals'}
+      %a{:href => "#",  :id => "stand_init_btn", :data => {:role => "button", :inline => "true"}} Stand Init
+      %a{:href => "#",  :id => "crouch_btn", :data => {:role => "button", :inline => "true"}} Crouch
+      %a{:href => "#",  :id => "hello_btn", :data => {:role => "button", :inline => "true"}} Hello!
     %div{:class => 'jpeg_stream_viewer', :id =>'mjpeg'}
       %h2 Camera Top View
   %div{:data => { :role => 'footer'}}
