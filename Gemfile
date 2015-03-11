@@ -12,7 +12,7 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'pg', '0.15.1'
 
 group :development, :test do
-  gem 'debugger'
+  #gem 'debugger'
   gem 'byebug'
   gem 'sqlite3'
 end
@@ -55,4 +55,4 @@ gem 'haml'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-ruby '2.0.0'
+ruby '2.2.0'

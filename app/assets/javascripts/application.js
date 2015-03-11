@@ -32,7 +32,7 @@ $(document).ready(function() {
 				host : hostname,
 				width : mjpegWidth * 0.80,
 				height : mjpegHeight * 0.80,
-				topic : '/camera/image_raw',	
+				topic : '/nao_robot/camera/top/camera/image_raw',	
 				port: 36000
     		});	
     		mjpegViewerHostname = hostname;
@@ -79,10 +79,14 @@ $(document).ready(function() {
 	}
 
 	function createBodyPoseGoal(name) {
+		var goal_speed = parseFloat($("#posture_speed-s").val());
+
+
 		return new ROSLIB.Goal({
 			actionClient : bodyPoseActionClient,
 			goalMessage : {
-				pose_name : name
+				posture_name : name,
+				speed : goal_speed
 			}
 		});
 	}
@@ -198,15 +202,47 @@ $(document).ready(function() {
 
 	$("#crouch_btn").click(function() {
 		if (isConnected == true) {
-			createBodyPoseGoal("crouch").send();
+			createBodyPoseGoal("Crouch").send();
 		}
 	});
 
-	$("#hello_btn").click(function() {
+	$("#sit_btn").click(function() {
 		if (isConnected == true) {
-			createBodyPoseGoal("hello").send();
+			createBodyPoseGoal("Sit").send();
 		}
 	});
+
+	$("#stand_btn").click(function() {
+		if (isConnected == true) {
+			createBodyPoseGoal("Stand").send();
+		}
+	});
+
+	$("#stand_zero_btn").click(function() {
+		if (isConnected == true) {
+			createBodyPoseGoal("StandZero").send();
+		}
+	});
+
+	$("#sit_relax_btn").click(function() {
+		if (isConnected == true) {
+			createBodyPoseGoal("SitRelax").send();
+		}
+	});
+
+	$("#lying_belly_btn").click(function() {
+		if (isConnected == true) {
+			createBodyPoseGoal("LyingBelly").send();
+		}
+	});
+
+	$("#lying_back_btn").click(function() {
+		if (isConnected == true) {
+			createBodyPoseGoal("LyingBack").send();
+		}
+	});
+
+
 
 	$("#flip-10").on( "slidestop", function( event, ui ) {} );
 	$("#flip-10").slider({
@@ -237,8 +273,8 @@ $(document).ready(function() {
 				    callStiffness(connection, true);
 				    bodyPoseActionClient = new ROSLIB.ActionClient({
 				    	ros : connection,
-				    	serverName : '/body_pose',
-				    	actionName : 'nao_msgs/BodyPoseAction',
+				    	serverName : '/body_pose_naoqi',
+				    	actionName : 'naoqi_msgs/BodyPoseWithSpeedAction',
 				    	timeout : 3
 				    });
 				    initJPEGStreamer(ip);

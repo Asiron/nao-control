@@ -39,12 +39,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     columnize (0.3.6)
-    debugger (1.6.1)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.2.3)
     debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.2.3)
     erubis (2.7.0)
     execjs (2.0.2)
     haml (4.0.3)
@@ -128,7 +123,6 @@ PLATFORMS
 DEPENDENCIES
   byebug
   coffee-rails (~> 4.0.0)
-  debugger
   haml
   jbuilder (~> 1.2)
   jquery-rails

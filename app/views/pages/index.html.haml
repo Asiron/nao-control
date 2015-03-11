@@ -33,9 +33,20 @@
       %div{:class => 'ui-block-b'}
         %a{:href => "#",  :id => "send_message_btn", :data => {:role => "button", :icon => "gear", :inline => "true"}} Send 
     %div{:id =>'body_pose_goals'}
+      %a{:href => "#",  :id => "stand_btn", :data => {:role => "button", :inline => "true"}} Stand 
       %a{:href => "#",  :id => "stand_init_btn", :data => {:role => "button", :inline => "true"}} Stand Init
+      %a{:href => "#",  :id => "stand_zero_btn", :data => {:role => "button", :inline => "true"}} Stand Zero   
+
       %a{:href => "#",  :id => "crouch_btn", :data => {:role => "button", :inline => "true"}} Crouch
-      %a{:href => "#",  :id => "hello_btn", :data => {:role => "button", :inline => "true"}} Hello!
+
+      %a{:href => "#",  :id => "sit_relax_btn", :data => {:role => "button", :inline => "true"}} Sit Relax 
+      %a{:href => "#",  :id => "sit_btn", :data => {:role => "button", :inline => "true"}} Sit
+
+      %a{:href => "#",  :id => "lying_belly_btn", :data => {:role => "button", :inline => "true"}} Lying Belly
+      %a{:href => "#",  :id => "lying_back_btn", :data => {:role => "button", :inline => "true"}} Lying Back
+
+      %label{:for => 'textinput-s'} Posture Speed:
+      %input{:type => 'text', :name => 'textinput-s', :id => 'posture_speed-s', :placeholder => "0.7", :value => "0.7", :data => {:clear => {:btn => 'true'}}}
     %div{:class => 'jpeg_stream_viewer', :id =>'mjpeg'}
       %h2 Camera Top View
   %div{:data => { :role => 'footer'}}
