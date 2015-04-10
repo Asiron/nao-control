@@ -13,6 +13,8 @@ $(document).ready(function() {
 	    height : $(window).height()
 	};
 
+	var robotPrefix = "";
+
 	function initJPEGStreamer(hostname) {	
 		if (mjpegViewerHostname != hostname) {
 			var mjpegWidth  = 320;
@@ -254,6 +256,9 @@ $(document).ready(function() {
 	  			var index = fullHostname.search(":");
 	  			var ip   = fullHostname.substr(0, index);
 	  			var port = fullHostname.substr(index+1, fullHostname.length);
+
+	  			robotPrefix = $("#robotprefix-s").val();
+
 	  			console.log('ws://' + fullHostname);
 	  			try {
 		  			connection = new ROSLIB.Ros({
@@ -261,19 +266,19 @@ $(document).ready(function() {
 		  			});
 			  		cmdVelTopic = new ROSLIB.Topic({
 					    ros : connection,
-					    name : '/cmd_vel',
+					    name : robotPrefix + '/cmd_vel',
 					    messageType : 'geometry_msgs/Twist'
 				    });
 				    speechTopic = new ROSLIB.Topic({
 				    	ros : connection,
-				    	name : '/speech',
+				    	name : robotPrefix +'/speech',
 				    	messageType : 'std_msgs/String',
 				    });
 				    isConnected = true;
 				    callStiffness(connection, true);
 				    bodyPoseActionClient = new ROSLIB.ActionClient({
 				    	ros : connection,
-				    	serverName : '/body_pose_naoqi',
+				    	serverName : robotPrefix + '/body_pose_naoqi',
 				    	actionName : 'naoqi_msgs/BodyPoseWithSpeedAction',
 				    	timeout : 3
 				    });

@@ -17,6 +17,10 @@
           %select{:name => "flip-10", :id => "flip-10", :data => {:role => "slider"}}
             %option{:value => "off"} Off
             %option{:value => "on"} On
+      %div{:class => "ui-grid-a"}
+        %div{:class => 'ui-block-a'}
+          %label{:for => 'textinput-s'} Insert Robot prefix:
+          %input{:type => 'text', :name => 'textinput-s', :id => 'robotprefix-s', :placeholder => "nao", :value => "nao", :data => {:clear => {:btn => 'true'}}}    
     %div{:class => 'button_container'}
       %div{:class => 'button_grid_forward'}
         %a{:href => "#",  :id => "forward_btn", :data => {:role => "button", :icon => "arrow-u", :iconpos => "top", :inline => "true"}} Forward
