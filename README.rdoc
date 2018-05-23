@@ -1,7 +1,0 @@
-== README
-
-RosApp
-	Mobile app for controlling Nao robots
-
-Send commands to Nao robot via websockets and control Nao movements.
-
